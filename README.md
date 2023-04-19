@@ -1,36 +1,188 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a id='readme-top'> </a>
+
+<br />
+<div align="center">
+  <a href="https://github.com/redconOne/finance-tracker">
+    <img src="" alt="finance tracker logo" width="50" height="50" />
+  </a>
+  <h3 align="center">
+    Finance Tracker
+  </h3>
+  <p align="center"> 
+    A finance tool to assist in visualization and tracking of both income and expenses.
+    <br />
+    <a href="https://github.com/redconOne/finance-tracker"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="">View Live</a>
+    |
+    <a href="https://github.com/redconOne/finance-tracker/issues">Report Bug</a>
+    |
+    <a href="https://github.com/redconOne/finance-tracker/issues">Request Feature</a>
+  </p>
+</div>
+
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about">About</a>
+      <ul>
+        <li>
+          <a href="#built-with">Built With</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li>
+          <a href="#prerequisites">Prerequisites</a>
+        </li>
+        <li>
+          <a href="#installation">Installation</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="#usage">Usage</a>
+    </li>
+    <li>
+      <a href="#roadmap">Roadmap</a>
+    </li>
+    <li>
+      <a href="#optimizations">Optimizations</a>
+    </li>
+    <li>
+      <a href="#lessons-learned">Lessons Learned</a>
+    </li>
+    <li>
+      <a href="#contributing">Contributing</a>
+    </li>
+    <li>
+      <a href="#license">License</a>
+    </li>
+    <li>
+      <a href="#contact">Contact</a>
+    </li>
+  </ol>
+</details>
+
+## About
+
+<div align="center">
+  <img src="./public/img/financeTrackerLanding.png" alt="project landing page image" width="700px" />
+</div>
+
+<br />
+<p>
+  Finance Tracker is a simple app that allows you to track income and expenses visually, with persistent data storage via Firebase.
+</p>
+
+### Built With
+
+![next.js](https://img.shields.io/badge/nextjs-%23000000.svg?style=for-the-badge&logo=next.js)
+
+![Firebase](https://img.shields.io/badge/firebase-%23232323.svg?style=for-the-badge&logo=firebase&logoColor)
+
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%233949AB.svg?style=for-the-badge&logo=tailwind-css)
+
+<p align="right">
+  (<a href="#readme-top">back to top</a>)
+</p>
 
 ## Getting Started
 
-First, run the development server:
+<p>
+  To get the project running on your local machine you will require Node.js and to use the following instructions.
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+### Prerequisites
+
+![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
+
+```sh
+npm install npm@latest -g
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Sign up for your own non-relational document database at
+   [Firebase](https://firebase.google.com)
+2. Clone the repo
+   ```sh
+   git clone https://github.com/redconOne/finance-tracker.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Enter your port, database string, and API keys in `config.js` or `.env` file
+   ```sh
+    PORT = 2121 (or port of your choosing)
+    DB_STRING = `your database URI`
+   ```
+5. Run in development environment
+   ```sh
+   npm run dev
+   ```
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Sign in
+- Input income
+- Record expenses
 
-## Learn More
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-To learn more about Next.js, take a look at the following resources:
+<!-- ROADMAP -->
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Roadmap
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [x] Include visualization of expenses
+- [ ] Include line graph to visualize savings
+- [ ] Allow multiple bank accounts / checkings / savings
 
-## Deploy on Vercel
+See the [open issues](https://github.com/redconOne/finance-tracker/issues) for a
+full list of proposed features (and known issues).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Optimizations
+
+## Lessons Learned
+
+- Learning how to use Aliases within a next.js project
+- Learned a good amount more concerning tailwind component styling
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Feel free to join in! Whether its fixing bugs, improving documentation, or
+simply spreading the word! Please see
+[Contributing Guidelines](/CONTRIBUTING.md) for further guidance. If you require
+assistance please don't hesitate to reach out! P.S. Don't forget give the
+project a star!
+
+<!-- LICENSE -->
+
+## License
+
+Distributed under the MIT License. See [LICENSE](./LICENSE) for more
+information.
+
+<!-- CONTACT -->
+
+## Contact
+
+<h3 align='center'> Ming Ng</h3>
+<h4 align='center'>
+  <a href="https://twitter.com/MingLeeNg1">Twitter</a> |
+  <a href="https://linkedin.com/in/MingLeeNg">Linkedin</a>
+  <a href="https://minglee.me">My Portoflio</a>
+</h4>
+
+Project Link: [Finance Tracker]()
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
