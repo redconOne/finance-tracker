@@ -5,7 +5,7 @@ const Navigation = () => {
     <header className="container max-w-2xl px-6 py-6 mx-auto">
       <div className="flex items-center justify-between">
         {/* User Information */}
-        <div className="flex-items-center">
+        <div className="flex items-center gap-2">
           {/* Profile Picture */}
           <div className="rounded-full overflow-hidden h-[40px] w-[40px]">
             <img
