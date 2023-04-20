@@ -18,6 +18,14 @@
   }
 
   .btn-danger {
-    @apply text-white bg-red-600 border-red-600;
+    @apply text-white bg-red-600 border border-red-600;
+  }
+
+  .btn-primary {
+    @apply text-lime-400 bg-slate-700 border border-slate-700;
+  }
+
+  .btn-primary-outline {
+    @apply text-lime-400 border border-lime-400;
   }
 }
