@@ -1,30 +1,35 @@
+'use client';
 import ExpenseItem from '@/components/ExpenseItem';
 import { currencyFormatter } from '@/lib/utils';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 const TEST_DATA = [
   {
     id: 1,
     title: 'Rent',
     color: '#000',
-    amount: 1000,
+    total: 1000,
   },
   {
     id: 2,
     title: 'Groceries',
-    color: '#123',
-    amount: 500,
+    color: '#009',
+    total: 500,
   },
   {
     id: 3,
     title: 'Fuel',
     color: '#321',
-    amount: 250,
+    total: 250,
   },
   {
     id: 4,
     title: 'Entertainment',
     color: '#567',
-    amount: 125,
+    total: 125,
   },
 ];
 
@@ -50,10 +55,31 @@ export default function Home() {
               <ExpenseItem
                 color={expense.color}
                 title={expense.title}
-                amount={expense.amount}
+                total={expense.total}
               />
             );
           })}
+        </div>
+      </section>
+
+      {/* Chart */}
+      <section className="py-6">
+        <h3 className="text-2xl">Stats</h3>
+        <div className="w-1/2 mx-auto">
+          <Doughnut
+            data={{
+              labels: TEST_DATA.map((expense) => expense.title),
+              datasets: [
+                {
+                  label: 'Expenses',
+                  data: TEST_DATA.map((expense) => expense.total),
+                  backgroundColor: TEST_DATA.map((expense) => expense.color),
+                  borderColor: ['#18181B'],
+                  borderWidth: 5,
+                },
+              ],
+            }}
+          />
         </div>
       </section>
     </main>
