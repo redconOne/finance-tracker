@@ -20,7 +20,7 @@ const Navigation = () => {
         </div>
 
         {/* Navigation */}
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center gap-4">
           <div>
             <ImStatsBars className="text-2xl" />
           </div>
