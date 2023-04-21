@@ -3,10 +3,10 @@ import { currencyFormatter } from '@/lib/utils';
 type expenseItem = {
   title: string;
   color: string;
-  amount: number;
+  total: number;
 };
 
-const ExpenseItem = ({ title, color, amount }: expenseItem) => {
+const ExpenseItem = ({ title, color, total }: expenseItem) => {
   return (
     <button>
       <div className="flex items-center justify-between px-4 py-4 bg-slate-700 rounded-3xl">
@@ -17,7 +17,7 @@ const ExpenseItem = ({ title, color, amount }: expenseItem) => {
           />
           <h4 className="capitalize">{title}</h4>
         </div>
-        <p>{currencyFormatter(amount)}</p>
+        <p>{currencyFormatter(total)}</p>
       </div>
     </button>
   );
