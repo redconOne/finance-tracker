@@ -1,12 +1,12 @@
 import { currencyFormatter } from '@/lib/utils';
 
-type expenseItem = {
+interface ExpenseItem {
   title: string;
   color: string;
   total: number;
-};
+}
 
-const ExpenseItem = ({ title, color, total }: expenseItem) => {
+const ExpenseItem = ({ title, color, total }: ExpenseItem) => {
   return (
     <button>
       <div className="flex items-center justify-between px-4 py-4 bg-slate-700 rounded-3xl">
