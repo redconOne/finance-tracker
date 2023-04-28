@@ -1,7 +1,6 @@
 import Modal from '@/components/Modal';
-import { useState, useContext } from 'react';
+import { useRef, useState, useContext } from 'react';
 import { financeContext } from '@/lib/store/finance-context';
-import ExpenseItem from '../ExpenseItem';
 import { v4 as uuidv4 } from 'uuid';
 
 type ModalProps = {
@@ -24,12 +23,18 @@ type ExpenseEntryItem = {
 };
 
 function AddExpenseModal({ show, onClose }: ModalProps) {
+  // Context
+  const { expenses, addExpenseItem, addCategory } = useContext(financeContext);
+  // State
   const [expenseAmount, setExpenseAmount] = useState(0);
-  const { expenses } = useContext(financeContext);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [showAddExpense, setShowAddExpense] = useState(false);
+  // Ref
+  const titleRef = useRef<HTMLInputElement | null>(null);
+  const colorRef = useRef<HTMLInputElement | null>(null);
 
   // Handler Functions
-  const addExpenseItemHandler = () => {
+  const addExpenseItemHandler = async () => {
     const expense = expenses.find((e: ExpenseEntry) => {
       return e.id === selectedCategory;
     });
@@ -48,9 +53,25 @@ function AddExpenseModal({ show, onClose }: ModalProps) {
       ],
     };
 
-    setExpenseAmount(0);
-    setSelectedCategory(null);
-    onClose();
+    try {
+      await addExpenseItem(selectedCategory, newExpense);
+      setExpenseAmount(0);
+      setSelectedCategory(null);
+      onClose();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  const addCategoryHandler = async () => {
+    const title = titleRef.current?.value || '';
+    const color = colorRef.current?.value || '';
+
+    try {
+      await addCategory({ title, color, total: 0 });
+      setShowAddExpense(false);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -75,7 +96,44 @@ function AddExpenseModal({ show, onClose }: ModalProps) {
       {/* Expense Categories */}
       {expenseAmount > 0 && (
         <div className="flex flex-col gap-4 mt-6">
-          <h3 className="text-2xl capitalize">Select expense category:</h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-2xl capitalize">Select expense category:</h3>
+            <button
+              className="text-lime-400"
+              onClick={() => setShowAddExpense(true)}
+            >
+              + New Category
+            </button>
+          </div>
+
+          {showAddExpense && (
+            <div className="flex items-center justify-between">
+              <input
+                type="text"
+                placeholder="Enter Title"
+                ref={titleRef}
+              />
+
+              <label htmlFor="">Pick Color</label>
+              <input
+                type="color"
+                ref={colorRef}
+                className="w-24 h-10"
+              />
+              <button
+                className="btn btn-primary-outline"
+                onClick={addCategoryHandler}
+              >
+                Create
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={() => setShowAddExpense(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
           {expenses.map((expense: ExpenseEntry) => {
             return (
               <button
