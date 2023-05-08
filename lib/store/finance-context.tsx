@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { db } from '@/lib/firebase';
+import { authContext } from './auth-context';
 import {
   collection,
   addDoc,
@@ -9,6 +10,8 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,
+  where,
 } from 'firebase/firestore';
 
 type Props = {
@@ -61,6 +64,7 @@ export const financeContext = createContext<financeContextType>({
 export default function FinanceContextProvider({ children }: Props) {
   const [income, setIncome] = useState<IncomeEntry[]>([]);
   const [expenses, setExpenses] = useState<ExpenseEntry[]>([]);
+  const { user } = useContext(authContext);
 
   const addIncomeItem = async (newIncome: IncomeEntry) => {
     const collectionRef = collection(db, 'income');
@@ -98,9 +102,12 @@ export default function FinanceContextProvider({ children }: Props) {
   };
 
   useEffect(() => {
-    const getIncomedata = async () => {
+    if (!user) return;
+
+    const getIncomeData = async () => {
       const collectionRef = collection(db, 'income');
-      const docsSnapshot = await getDocs(collectionRef);
+      const uidQuery = query(collectionRef, where('uid', '==', user.uid));
+      const docsSnapshot = await getDocs(uidQuery);
 
       const data = docsSnapshot.docs.map((doc) => {
         return {
@@ -115,7 +122,8 @@ export default function FinanceContextProvider({ children }: Props) {
 
     const getExpensesData = async () => {
       const collectionRef = collection(db, 'expenses');
-      const docSnapshot = await getDocs(collectionRef);
+      const uidQuery = query(collectionRef, where('uid', '==', user.uid));
+      const docSnapshot = await getDocs(uidQuery);
 
       const data = docSnapshot.docs.map((doc) => {
         return {
@@ -129,9 +137,9 @@ export default function FinanceContextProvider({ children }: Props) {
       setExpenses(data);
     };
 
-    getIncomedata();
+    getIncomeData();
     getExpensesData();
-  }, []);
+  }, [user]);
 
   const addExpenseItem = async (expenseCategoryId: any, newExpense: any) => {
     const docRef = doc(db, 'expenses', expenseCategoryId);
@@ -170,6 +178,7 @@ export default function FinanceContextProvider({ children }: Props) {
       const collectionRef = collection(db, 'expenses');
 
       const docSnapshot = await addDoc(collectionRef, {
+        uid: user.uid,
         ...category,
         items: [],
       });
@@ -179,6 +188,7 @@ export default function FinanceContextProvider({ children }: Props) {
           ...prevExpenses,
           {
             id: docSnapshot.id,
+            uid: user.uid,
             items: [],
             ...category,
           },
