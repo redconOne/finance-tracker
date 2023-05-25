@@ -106,6 +106,7 @@ export default function Home() {
 
         {/* Chart */}
         <section className="py-6">
+          <a id="stats" />
           <h3 className="text-2xl">Stats</h3>
           <div className="w-1/2 mx-auto">
             <Doughnut
