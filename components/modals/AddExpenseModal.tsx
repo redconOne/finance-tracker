@@ -2,6 +2,8 @@ import Modal from '@/components/Modal';
 import { useRef, useState, useContext } from 'react';
 import { financeContext } from '@/lib/store/finance-context';
 import { v4 as uuidv4 } from 'uuid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type ModalProps = {
   show: boolean;
@@ -58,8 +60,10 @@ function AddExpenseModal({ show, onClose }: ModalProps) {
       setExpenseAmount(0);
       setSelectedCategory(null);
       onClose();
-    } catch (err) {
+      toast.success('Expense added!');
+    } catch (err: any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
   const addCategoryHandler = async () => {
@@ -69,8 +73,10 @@ function AddExpenseModal({ show, onClose }: ModalProps) {
     try {
       await addCategory({ title, color, total: 0 });
       setShowAddExpense(false);
-    } catch (err) {
+      toast.success('Category created!');
+    } catch (err: any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
