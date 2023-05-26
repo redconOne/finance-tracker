@@ -3,6 +3,7 @@ import { currencyFormatter } from '@/lib/utils';
 import { financeContext } from '@/lib/store/finance-context';
 import { authContext } from '@/lib/store/auth-context';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 import Modal from '@/components/Modal';
 
 interface ModalProps {
@@ -38,8 +39,10 @@ function AddIncomeModal({ show, onClose }: ModalProps) {
       await addIncomeItem(newIncome);
       if (descriptionRef.current) descriptionRef.current.value = '';
       if (amountRef.current) amountRef.current.value = '';
-    } catch (err) {
+      toast.success('Income added!');
+    } catch (err: any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
@@ -48,8 +51,10 @@ function AddIncomeModal({ show, onClose }: ModalProps) {
       await removeIncomeItem(incomeId);
       if (descriptionRef.current) descriptionRef.current.value = '';
       if (amountRef.current) amountRef.current.value = '';
-    } catch (err) {
+      toast.success('Income deleted!');
+    } catch (err: any) {
       console.error(err);
+      toast.error(err.message);
     }
   };
 
